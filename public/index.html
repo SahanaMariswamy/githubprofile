@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="manifest" href="manifest.json">
+    <style>
+    img{
+        border-radius: 10%;
+    }
+    .more{
+        display:flex;
+        margin-left:660px;
+        
+    }
+
+</style>
+
+
+    	 <body style="background-color:tomato;">
+    <center>
+         <h1> <i class="fa fa-user-circle" style="font-size:68px;color:black;"></i> GITHUB PROFILE</h1> 
+         <h1> <input type="text" id="text_input">
+        <input type="button" onclick="gitdata()" value="GET PROFILE"> <br></h1>
+        <h2><div id='git_image'>
+            <img src="" alt="PROFILE IMAGE" id="image"><br>
+            <a id="profile" href ="">PROFILE PAGE</a> <br> <br>
+           <a id="repo" href ="">REPOSITORY PAGE</a> </h2></center>
+        <br>
+            <p id='para'></p>
+        </div>
+
+       <div class="more">
+        <div class="partOne">
+           <p style="align-content:flex-start;">
+                url                           :
+           </p>
+            
+                <p style="align-content: flex-start;">
+                html_url                     :
+                </p>
+              <p style="align-content: flex-start;">
+                followers_url                :
+              </p>
+            <p style="align-content: flex-start;"> 
+                following_url                :
+                   </p>
+            <p style="align-content: flex-start;">
+                gists_url                    :
+            </p>
+        
+              <p style="align-content: left;">
+                  starred_url               :
+           </p>
+           <p style="align-content: left;">
+                subscriptions_url           :
+           </p>
+          <p style="align-content: left;">
+               organizations_url            :
+             </p>
+            <p style="align-content: left;">
+                repos_url                   :
+            </p>
+            <p style="align-content: left;">
+                events_url                  :
+            </p>
+            <p style="align-content: left;">
+                received_events_url         :
+            </p>
+            <p style="align-content: left;">
+                type                        :
+            </p>
+            <p style="align-content: left;">
+                site_admin                  :
+            </p>    
+       
+        </div>
+        <div class="partTwo">
+            <p id="url">
+                
+            </p>
+            <p id="html_url">
+                
+            </p>
+            <p id="followers_url">
+                
+            </p>
+            <p id="following_url">
+                
+            </p>
+            <p id="gists_url"> 
+                
+            </p>
+            <p id="starred_url">
+                
+            </p>
+            <p id="subscriptions_url">
+                
+            </p>
+            <p id="organizations_url">
+                
+            </p>
+            <p id="repos_url">
+                
+            </p>
+            <p id="events_url">
+                
+            </p>
+            <p id="received_events_url">     
+            </p>
+            <p id="type">
+             
+            </p>
+            <p id="site_admin">
+                
+            </p>
+        </div>
+    </div>
+        </center>
+    </body>
+<script>
+     if('serviceWorker' in navigator){
+        window.addEventListener('load',()=>{
+            navigator.serviceWorker.register('sw.js')
+        .then(registration =>{
+            console.log('service worker is registered',registration);
+        })
+        .catch(err =>{
+            console.log('Registration failed',err);
+        })
+        })
+    }
+    
+    function gitdata(){
+
+    var url='https://api.github.com/users/'+document.getElementById('text_input').value;
+
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.avatar_url)
+        var im = document.getElementById("image");
+        im.setAttribute("src",data.avatar_url);
+        document.getElementById("profile").setAttribute("href",data.html_url);
+        document.getElementById("repo").setAttribute("href",data.repos_url);
+        //var gi= document.getElementById('para');
+        //gi.innerHTML=JSON.stringify(data);
+        document.getElementById('url').innerHTML=data.url;
+            document.getElementById('html_url').innerHTML=data.html_url;
+            document.getElementById('followers_url').innerHTML=data.followers_url;
+            document.getElementById('following_url').innerHTML=data.following_url;
+            document.getElementById('gists_url').innerHTML=data.gists_url;
+            document.getElementById('starred_url').innerHTML=data.starred_url;
+            document.getElementById('subscriptions_url').innerHTML=data.subscriptions_url;
+            document.getElementById('organizations_url').innerHTML=data.organizations_url;
+            document.getElementById('repos_url').innerHTML=data.repos_url;
+            document.getElementById('events_url').innerHTML=data.events_url;
+            document.getElementById('received_events_url').innerHTML=data.received_events_url;
+            document.getElementById('type').innerHTML=data.type;
+            document.getElementById('site_admin').innerHTML=data.site_admin;
+    })
+
+    .catch(function(response){
+        return response.status;
+        console.log(response.status);
+    });;
+    
+    
+    
+}
+</script>
+</html>
